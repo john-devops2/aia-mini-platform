@@ -1,0 +1,74 @@
+# k8s/orders-consumer.yaml
+# This is a Kubernetes manifest — tells Kubernetes what to run
+# Mirrors what your team's Jenkins pipeline generates automatically
+# from appIdentityMappings/BQConsumer/orders-consumer.yaml
+
+# ─────────────────────────────────────────
+# ConfigMap — stores configuration separately from the app
+# Same concept as your team's kubernetesSecret in appIdentityMappings
+# ─────────────────────────────────────────
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orders-consumer-config
+  namespace: consumer
+  labels:
+    app: orders-consumer
+    team: aia
+    environment: dev
+data:
+  KAFKA_TOPIC: "orders"
+  KAFKA_GROUP_ID: "orders-consumer-group"
+  KAFKA_BOOTSTRAP: "localhost:29092"
+  DB_HOST: "localhost"
+  DB_NAME: "aiadb"
+  DB_USER: "aiauser"
+
+---
+# ─────────────────────────────────────────
+# Deployment — tells Kubernetes to keep 1 copy of this pod running
+# If pod crashes, Kubernetes automatically restarts it
+# ─────────────────────────────────────────
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-consumer
+  namespace: consumer
+  labels:
+    app: orders-consumer
+    team: aia
+    environment: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-consumer
+  template:
+    metadata:
+      labels:
+        app: orders-consumer
+        team: aia
+        environment: dev
+    spec:
+      containers:
+        - name: consumer
+          image: python:3.11-slim
+          command: ["sleep", "infinity"]
+          env:
+            - name: KAFKA_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: orders-consumer-config
+                  key: KAFKA_TOPIC
+            - name: KAFKA_GROUP_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: orders-consumer-config
+                  key: KAFKA_GROUP_ID
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
