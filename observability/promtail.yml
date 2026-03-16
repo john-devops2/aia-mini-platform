@@ -1,0 +1,23 @@
+# promtail.yml
+# Promtail is the log collection agent
+# It watches log files and ships them to Loki
+# Same concept as Filebeat shipping logs to Elasticsearch
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: pipeline-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: aia-pipeline
+          __path__: /logs/*.log

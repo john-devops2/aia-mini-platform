@@ -1,0 +1,52 @@
+2026-03-16 01:44:21,463 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:44:21,486 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:44:21,488 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:44:21,491 INFO Connected to Kafka broker at localhost:29092
+2026-03-16 01:44:21,491 INFO Reading orders from data/orders.csv
+2026-03-16 01:44:21,598 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:44:21,600 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:44:21,600 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:44:22,782 INFO Sent 100 messages to Kafka topic: orders
+2026-03-16 01:44:23,886 INFO Sent 200 messages to Kafka topic: orders
+2026-03-16 01:44:24,986 INFO Sent 300 messages to Kafka topic: orders
+2026-03-16 01:44:26,092 INFO Sent 400 messages to Kafka topic: orders
+2026-03-16 01:44:27,285 INFO Sent 500 messages to Kafka topic: orders
+2026-03-16 01:44:28,381 INFO Sent 600 messages to Kafka topic: orders
+2026-03-16 01:44:29,479 INFO Sent 700 messages to Kafka topic: orders
+2026-03-16 01:44:30,596 INFO Sent 800 messages to Kafka topic: orders
+2026-03-16 01:44:31,696 INFO Sent 900 messages to Kafka topic: orders
+2026-03-16 01:44:32,808 INFO Sent 1000 messages to Kafka topic: orders
+2026-03-16 01:44:32,826 INFO Producer done. Total sent: 1000 messages
+2026-03-16 01:44:32,836 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:44:32,862 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:44:32,863 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:44:32,867 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:44:32,979 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:44:32,981 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:44:32,984 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:56:15,998 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:16,010 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:56:16,011 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:16,014 INFO Connected to Kafka broker at localhost:29092
+2026-03-16 01:56:16,015 INFO Reading orders from data/orders.csv
+2026-03-16 01:56:16,128 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:16,129 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:16,130 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:56:17,214 INFO Sent 100 messages to Kafka topic: orders
+2026-03-16 01:56:18,302 INFO Sent 200 messages to Kafka topic: orders
+2026-03-16 01:56:19,385 INFO Sent 300 messages to Kafka topic: orders
+2026-03-16 01:56:20,470 INFO Sent 400 messages to Kafka topic: orders
+2026-03-16 01:56:21,565 INFO Sent 500 messages to Kafka topic: orders
+2026-03-16 01:56:22,725 INFO Sent 600 messages to Kafka topic: orders
+2026-03-16 01:56:23,831 INFO Sent 700 messages to Kafka topic: orders
+2026-03-16 01:56:24,933 INFO Sent 800 messages to Kafka topic: orders
+2026-03-16 01:56:26,046 INFO Sent 900 messages to Kafka topic: orders
+2026-03-16 01:56:27,172 INFO Sent 1000 messages to Kafka topic: orders
+2026-03-16 01:56:27,189 INFO Producer done. Total sent: 1000 messages
+2026-03-16 01:56:27,198 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:27,238 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:56:27,239 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:27,241 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:56:27,357 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:27,358 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:27,360 INFO <BrokerConnection client_id=kafka-python-producer-2, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 

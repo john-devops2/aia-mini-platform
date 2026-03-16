@@ -1,0 +1,96 @@
+2026-03-16 01:45:00,004 INFO Connected to PostgreSQL
+2026-03-16 01:45:00,075 INFO Table orders ready
+2026-03-16 01:45:00,083 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:45:00,093 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:45:00,094 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:45:00,095 INFO Updating subscribed topics to: ('orders',)
+2026-03-16 01:45:00,097 INFO Connected to Kafka. Reading messages
+2026-03-16 01:45:00,102 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:45:00,103 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:45:00,104 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:45:01,705 INFO Coordinator for group/orders-consumer-group-v3 is BrokerMetadata(nodeId='coordinator-1', host='localhost', port=29092, rack=None)
+2026-03-16 01:45:01,706 INFO Discovered coordinator coordinator-1 for group orders-consumer-group-v3
+2026-03-16 01:45:01,706 INFO Starting new heartbeat thread
+2026-03-16 01:45:01,707 INFO Revoking previously assigned partitions set() for group orders-consumer-group-v3
+2026-03-16 01:45:01,707 INFO Failed to join group orders-consumer-group-v3: NodeNotReadyError: coordinator-1
+2026-03-16 01:45:01,708 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=coordinator-1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:45:01,709 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=coordinator-1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:45:01,811 INFO (Re-)joining group orders-consumer-group-v3
+2026-03-16 01:45:01,864 INFO Received member id kafka-python-2.3.0-6040381b-2ff3-44db-9183-9c55aafda219 for group orders-consumer-group-v3; will retry join-group
+2026-03-16 01:45:01,865 INFO Failed to join group orders-consumer-group-v3: [Error 79] MemberIdRequiredError
+2026-03-16 01:45:01,865 INFO (Re-)joining group orders-consumer-group-v3
+2026-03-16 01:45:04,917 INFO Successfully joined group orders-consumer-group-v3 <Generation 1 (member_id: kafka-python-2.3.0-6040381b-2ff3-44db-9183-9c55aafda219, protocol: range)>
+2026-03-16 01:45:04,918 INFO Elected group leader -- performing partition assignments using range
+2026-03-16 01:45:04,982 INFO Updated partition assignment: [TopicPartition(topic='orders', partition=0), TopicPartition(topic='orders', partition=1), TopicPartition(topic='orders', partition=2), TopicPartition(topic='orders', partition=3)]
+2026-03-16 01:45:04,982 INFO Setting newly assigned partitions {TopicPartition(topic='orders', partition=0), TopicPartition(topic='orders', partition=1), TopicPartition(topic='orders', partition=2), TopicPartition(topic='orders', partition=3)} for group orders-consumer-group-v3
+2026-03-16 01:45:05,025 INFO Resetting offset for partition TopicPartition(topic='orders', partition=0) to offset 0.
+2026-03-16 01:45:05,025 INFO Resetting offset for partition TopicPartition(topic='orders', partition=1) to offset 0.
+2026-03-16 01:45:05,026 INFO Resetting offset for partition TopicPartition(topic='orders', partition=2) to offset 0.
+2026-03-16 01:45:05,028 INFO Resetting offset for partition TopicPartition(topic='orders', partition=3) to offset 0.
+2026-03-16 01:45:05,713 INFO Consumed 100 messages | partition 0 offset 99
+2026-03-16 01:45:06,265 INFO Consumed 200 messages | partition 0 offset 199
+2026-03-16 01:45:06,773 INFO Consumed 300 messages | partition 0 offset 299
+2026-03-16 01:45:07,259 INFO Consumed 400 messages | partition 0 offset 399
+2026-03-16 01:45:07,786 INFO Consumed 500 messages | partition 1 offset 33
+2026-03-16 01:45:08,456 INFO Consumed 600 messages | partition 1 offset 133
+2026-03-16 01:45:08,956 INFO Consumed 700 messages | partition 1 offset 233
+2026-03-16 01:45:09,421 INFO Consumed 800 messages | partition 1 offset 333
+2026-03-16 01:45:09,857 INFO Consumed 900 messages | partition 1 offset 433
+2026-03-16 01:45:10,337 INFO Consumed 1000 messages | partition 1 offset 533
+2026-03-16 01:45:10,582 INFO Consumed 1100 messages | partition 2 offset 98
+2026-03-16 01:45:10,753 INFO Consumed 1200 messages | partition 2 offset 198
+2026-03-16 01:45:10,996 INFO Consumed 1300 messages | partition 2 offset 298
+2026-03-16 01:45:11,205 INFO Consumed 1400 messages | partition 2 offset 398
+2026-03-16 01:45:11,490 INFO Consumed 1500 messages | partition 3 offset 1
+2026-03-16 01:45:11,648 INFO Consumed 1600 messages | partition 3 offset 101
+2026-03-16 01:45:11,829 INFO Consumed 1700 messages | partition 3 offset 201
+2026-03-16 01:45:11,951 INFO Consumed 1800 messages | partition 3 offset 301
+2026-03-16 01:45:12,049 INFO Consumed 1900 messages | partition 3 offset 401
+2026-03-16 01:45:12,195 INFO Consumed 2000 messages | partition 3 offset 501
+2026-03-16 01:45:27,205 INFO Consumer done. Total written to PostgreSQL: 2000
+2026-03-16 01:56:45,319 INFO Connected to PostgreSQL
+2026-03-16 01:56:45,353 INFO Table orders ready
+2026-03-16 01:56:45,361 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:45,369 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <checking_api_versions_recv> [IPv6 ('::1', 29092, 0, 0)]>: Broker version identified as 2.6
+2026-03-16 01:56:45,370 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:45,371 INFO Updating subscribed topics to: ('orders',)
+2026-03-16 01:56:45,371 INFO Connected to Kafka. Reading messages
+2026-03-16 01:56:45,375 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:45,377 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:45,378 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=bootstrap-0 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Closing connection. 
+2026-03-16 01:56:45,484 INFO Coordinator for group/orders-consumer-group-v3 is BrokerMetadata(nodeId='coordinator-1', host='localhost', port=29092, rack=None)
+2026-03-16 01:56:45,485 INFO Discovered coordinator coordinator-1 for group orders-consumer-group-v3
+2026-03-16 01:56:45,486 INFO Starting new heartbeat thread
+2026-03-16 01:56:45,488 INFO Revoking previously assigned partitions set() for group orders-consumer-group-v3
+2026-03-16 01:56:45,489 INFO Failed to join group orders-consumer-group-v3: NodeNotReadyError: coordinator-1
+2026-03-16 01:56:45,492 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=coordinator-1 host=localhost:29092 <connecting> [IPv6 ('::1', 29092, 0, 0)]>: connecting to localhost:29092 [('::1', 29092, 0, 0) IPv6]
+2026-03-16 01:56:45,499 INFO <BrokerConnection client_id=kafka-python-2.3.0, node_id=coordinator-1 host=localhost:29092 <connected> [IPv6 ('::1', 29092, 0, 0)]>: Connection complete.
+2026-03-16 01:56:45,610 INFO (Re-)joining group orders-consumer-group-v3
+2026-03-16 01:56:45,614 INFO Received member id kafka-python-2.3.0-33c62a34-b555-4661-9394-addc99e113af for group orders-consumer-group-v3; will retry join-group
+2026-03-16 01:56:45,615 INFO Failed to join group orders-consumer-group-v3: [Error 79] MemberIdRequiredError
+2026-03-16 01:56:45,616 INFO (Re-)joining group orders-consumer-group-v3
+2026-03-16 01:56:48,633 INFO Successfully joined group orders-consumer-group-v3 <Generation 3 (member_id: kafka-python-2.3.0-33c62a34-b555-4661-9394-addc99e113af, protocol: range)>
+2026-03-16 01:56:48,638 INFO Elected group leader -- performing partition assignments using range
+2026-03-16 01:56:48,664 INFO Updated partition assignment: [TopicPartition(topic='orders', partition=0), TopicPartition(topic='orders', partition=1), TopicPartition(topic='orders', partition=2), TopicPartition(topic='orders', partition=3)]
+2026-03-16 01:56:48,671 INFO Setting newly assigned partitions {TopicPartition(topic='orders', partition=0), TopicPartition(topic='orders', partition=1), TopicPartition(topic='orders', partition=2), TopicPartition(topic='orders', partition=3)} for group orders-consumer-group-v3
+2026-03-16 01:56:49,401 INFO Consumed 100 messages | partition 0 offset 565
+2026-03-16 01:56:50,004 INFO Consumed 200 messages | partition 0 offset 665
+2026-03-16 01:56:50,604 INFO Consumed 300 messages | partition 0 offset 765
+2026-03-16 01:56:51,163 INFO Consumed 400 messages | partition 0 offset 865
+2026-03-16 01:56:51,769 INFO Consumed 500 messages | partition 1 offset 564
+2026-03-16 01:56:52,049 INFO Consumed 600 messages | partition 1 offset 664
+2026-03-16 01:56:52,234 INFO Consumed 700 messages | partition 1 offset 764
+2026-03-16 01:56:52,405 INFO Consumed 800 messages | partition 1 offset 864
+2026-03-16 01:56:52,567 INFO Consumed 900 messages | partition 1 offset 964
+2026-03-16 01:56:52,752 INFO Consumed 1000 messages | partition 2 offset 510
+2026-03-16 01:56:52,914 INFO Consumed 1100 messages | partition 2 offset 610
+2026-03-16 01:56:53,058 INFO Consumed 1200 messages | partition 2 offset 710
+2026-03-16 01:56:53,201 INFO Consumed 1300 messages | partition 2 offset 810
+2026-03-16 01:56:53,316 INFO Consumed 1400 messages | partition 2 offset 910
+2026-03-16 01:56:53,428 INFO Consumed 1500 messages | partition 3 offset 521
+2026-03-16 01:56:53,566 INFO Consumed 1600 messages | partition 3 offset 621
+2026-03-16 01:56:53,714 INFO Consumed 1700 messages | partition 3 offset 721
+2026-03-16 01:56:53,971 INFO Consumed 1800 messages | partition 3 offset 821
+2026-03-16 01:56:54,170 INFO Consumed 1900 messages | partition 3 offset 921
+2026-03-16 01:56:54,279 INFO Consumed 2000 messages | partition 3 offset 1021
+2026-03-16 01:57:09,283 INFO Consumer done. Total written to PostgreSQL: 2000

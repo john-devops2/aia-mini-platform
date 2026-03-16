@@ -1,77 +1,76 @@
 # consumer.py
-# Reads messages from Kafka orders topic
-# Writes each message into PostgreSQL
-# Handles the real CSV data shape with category and order_date fields
+# Reads from Kafka and writes to PostgreSQL
+# Writes logs to logs/consumer.log so Promtail ships them to Loki
 
 from kafka import KafkaConsumer
 import psycopg2
 import json
+import logging
+import os
+
+# Set up logging
+os.makedirs('logs', exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    handlers=[
+        logging.FileHandler('logs/consumer.log'),
+        logging.StreamHandler()
+    ]
+)
+log = logging.getLogger(__name__)
 
 # Connect to PostgreSQL
 conn = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    database="aiadb",
-    user="aiauser",
-    password="aiapass"
+    host="localhost", port=5432,
+    database="aiadb", user="aiauser", password="aiapass"
 )
 cursor = conn.cursor()
-print("Connected to PostgreSQL")
+log.info("Connected to PostgreSQL")
 
-# Drop old table and create fresh one with all real fields
-# We drop because old table has fewer columns than new data
+# Create table
 cursor.execute("DROP TABLE IF EXISTS orders")
 cursor.execute("""
     CREATE TABLE orders (
-        order_id   TEXT PRIMARY KEY,
-        customer   TEXT,
-        category   TEXT,
-        amount     NUMERIC,
-        status     TEXT,
-        order_date DATE,
+        order_id    TEXT PRIMARY KEY,
+        customer    TEXT,
+        category    TEXT,
+        amount      NUMERIC,
+        status      TEXT,
+        order_date  DATE,
         consumed_at TIMESTAMP DEFAULT NOW()
     )
 """)
 conn.commit()
-print("Table 'orders' created with real schema\n")
+log.info("Table orders ready")
 
 # Connect to Kafka
-# group_id tracks progress — if restarted it continues from last offset
-# auto_offset_reset='earliest' means start from first message
 consumer = KafkaConsumer(
     'orders',
     bootstrap_servers='localhost:29092',
-    group_id='orders-consumer-group-v2',
+    group_id='orders-consumer-group-v3',
     auto_offset_reset='earliest',
     value_deserializer=lambda m: json.loads(m.decode('utf-8')),
     consumer_timeout_ms=15000
 )
-print("Connected to Kafka. Reading messages...\n")
+log.info("Connected to Kafka. Reading messages")
 
-# Read and store each message
 count = 0
 for message in consumer:
     order = message.value
-
     cursor.execute("""
         INSERT INTO orders (order_id, customer, category, amount, status, order_date)
         VALUES (%s, %s, %s, %s, %s, %s)
         ON CONFLICT (order_id) DO NOTHING
     """, (
-        order['order_id'],
-        order['customer'],
-        order['category'],
-        float(order['amount']),
-        order['status'],
-        order['order_date']
+        order['order_id'], order['customer'], order['category'],
+        float(order['amount']), order['status'], order['order_date']
     ))
     conn.commit()
     count += 1
-
-    # Print progress every 100 messages
     if count % 100 == 0:
-        print(f"Consumed {count} messages | partition: {message.partition} | offset: {message.offset}")
+        log.info(f"Consumed {count} messages | partition {message.partition} offset {message.offset}")
 
-print(f"\nDone. {count} messages written to PostgreSQL")
+log.info(f"Consumer done. Total written to PostgreSQL: {count}")
 cursor.close()
 conn.close()
