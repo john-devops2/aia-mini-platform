@@ -1,16 +1,13 @@
 # consumer.py
-# This script reads messages from the Kafka 'orders' topic
-# and writes each message into a PostgreSQL table
-# This is the pipeline — data moves from Kafka into storage
+# Reads messages from Kafka orders topic
+# Writes each message into PostgreSQL
+# Handles the real CSV data shape with category and order_date fields
 
 from kafka import KafkaConsumer
 import psycopg2
 import json
 
-# ─────────────────────────────────────────
-# Step 1 — Connect to PostgreSQL
-# This is our local database — stores consumed messages permanently
-# ─────────────────────────────────────────
+# Connect to PostgreSQL
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
@@ -19,60 +16,62 @@ conn = psycopg2.connect(
     password="aiapass"
 )
 cursor = conn.cursor()
-print("Connected to PostgreSQL\n")
+print("Connected to PostgreSQL")
 
-# ─────────────────────────────────────────
-# Step 2 — Create the orders table if it doesn't exist yet
-# This is like creating a BigQuery table before loading data
-# ─────────────────────────────────────────
+# Drop old table and create fresh one with all real fields
+# We drop because old table has fewer columns than new data
+cursor.execute("DROP TABLE IF EXISTS orders")
 cursor.execute("""
-    CREATE TABLE IF NOT EXISTS orders (
+    CREATE TABLE orders (
         order_id   TEXT PRIMARY KEY,
         customer   TEXT,
+        category   TEXT,
         amount     NUMERIC,
         status     TEXT,
-        created_at TIMESTAMP DEFAULT NOW()
+        order_date DATE,
+        consumed_at TIMESTAMP DEFAULT NOW()
     )
 """)
 conn.commit()
-print("Table 'orders' is ready\n")
+print("Table 'orders' created with real schema\n")
 
-# ─────────────────────────────────────────
-# Step 3 — Connect to Kafka and start consuming
-# group_id identifies this consumer — Kafka tracks its progress
-# auto_offset_reset='earliest' means start from the first message
-# ─────────────────────────────────────────
+# Connect to Kafka
+# group_id tracks progress — if restarted it continues from last offset
+# auto_offset_reset='earliest' means start from first message
 consumer = KafkaConsumer(
     'orders',
     bootstrap_servers='localhost:29092',
-    group_id='orders-consumer-group',
+    group_id='orders-consumer-group-v2',
     auto_offset_reset='earliest',
     value_deserializer=lambda m: json.loads(m.decode('utf-8')),
-    consumer_timeout_ms=10000
+    consumer_timeout_ms=15000
 )
 print("Connected to Kafka. Reading messages...\n")
 
-# ─────────────────────────────────────────
-# Step 4 — Read each message and write to PostgreSQL
-# ─────────────────────────────────────────
+# Read and store each message
 count = 0
 for message in consumer:
     order = message.value
 
     cursor.execute("""
-        INSERT INTO orders (order_id, customer, amount, status)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO orders (order_id, customer, category, amount, status, order_date)
+        VALUES (%s, %s, %s, %s, %s, %s)
         ON CONFLICT (order_id) DO NOTHING
-    """, (order['order_id'], order['customer'], order['amount'], order['status']))
-
+    """, (
+        order['order_id'],
+        order['customer'],
+        order['category'],
+        float(order['amount']),
+        order['status'],
+        order['order_date']
+    ))
     conn.commit()
     count += 1
 
-    print(f"Consumed: {order['order_id']} | partition: {message.partition} | offset: {message.offset}")
+    # Print progress every 100 messages
+    if count % 100 == 0:
+        print(f"Consumed {count} messages | partition: {message.partition} | offset: {message.offset}")
 
-# ─────────────────────────────────────────
-# Step 5 — Done
-# ─────────────────────────────────────────
-print(f"\nDone. {count} messages written to PostgreSQL table 'orders'")
+print(f"\nDone. {count} messages written to PostgreSQL")
 cursor.close()
 conn.close()

@@ -1,35 +1,42 @@
 # producer.py
-# This script connects to Kafka and sends 5 fake order messages
-# into the 'orders' topic — one message every second
+# Reads real orders from CSV and sends each row as a Kafka message
+# This mirrors how your company's source systems feed data into Kafka
+# SAP, Salesforce, Workday all act as producers in your real platform
 
 from kafka import KafkaProducer
 import json
+import csv
 import time
 
-# Step 1 — Connect to Kafka broker
+# Connect to Kafka broker
 # 29092 is our external port — what your laptop uses to reach Kafka
 producer = KafkaProducer(
     bootstrap_servers='localhost:29092',
     value_serializer=lambda v: json.dumps(v).encode('utf-8')
 )
 
-print("Connected to Kafka. Sending messages...\n")
+print("Connected to Kafka broker at localhost:29092")
+print("Reading orders from data/orders.csv...\n")
 
-# Step 2 — Define 5 fake orders
-orders = [
-    {"order_id": "ORD-001", "customer": "alice", "amount": 99.50,  "status": "placed"},
-    {"order_id": "ORD-002", "customer": "bob",   "amount": 149.00, "status": "placed"},
-    {"order_id": "ORD-003", "customer": "alice", "amount": 35.75,  "status": "placed"},
-    {"order_id": "ORD-004", "customer": "carol", "amount": 220.00, "status": "placed"},
-    {"order_id": "ORD-005", "customer": "dave",  "amount": 67.25,  "status": "placed"},
-]
+# Read CSV and send each row as a Kafka message
+sent = 0
+with open('data/orders.csv', 'r') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        # Convert amount to float — CSV reads everything as string
+        row['amount'] = float(row['amount'])
 
-# Step 3 — Send each order to the 'orders' topic
-for order in orders:
-    producer.send('orders', value=order)
-    print(f"Sent: {order['order_id']} | customer: {order['customer']} | amount: ${order['amount']}")
-    time.sleep(1)
+        # Send to orders topic
+        producer.send('orders', value=row)
+        sent += 1
 
-# Step 4 — Make sure all messages are delivered before exiting
+        # Print progress every 100 messages
+        if sent % 100 == 0:
+            print(f"Sent {sent} messages...")
+
+        # Small delay so Kafka UI shows messages flowing in
+        time.sleep(0.01)
+
+# Flush ensures all buffered messages are delivered
 producer.flush()
-print("\nAll messages sent to Kafka topic: orders")
+print(f"\nDone. {sent} orders sent to Kafka topic: orders")
